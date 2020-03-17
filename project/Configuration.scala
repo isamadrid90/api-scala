@@ -3,13 +3,13 @@ import sbt.Keys._
 
 object Configuration {
   val settings = Seq(
-    organization := "heisenbugtraveler",
-    scalaVersion := "2.12.7",
-
+    organization := "tv.codely",
+    scalaVersion := "2.12.4",
     // Custom folders path (/src/main/scala and /src/test/scala by default)
+    mainClass in Compile := Some("heisenbugtraveler.api_scala.ApiScala"),
     scalaSource in Compile := baseDirectory.value / "/src/main",
     scalaSource in Test := baseDirectory.value / "/src/test",
-
+    resourceDirectory in Compile := baseDirectory.value / "conf",
     // Compiler options
     scalacOptions ++= Seq(
       "-deprecation", // Warnings deprecation
@@ -23,7 +23,6 @@ object Configuration {
     ),
     scalacOptions in run in Compile -= "-Xcheckinit", // Remove it in production because it's expensive
     javaOptions += "-Duser.timezone=UTC",
-
     // Test options
     parallelExecution in Test := false,
     testForkedParallel in Test := false,
